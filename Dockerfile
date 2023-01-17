@@ -9,6 +9,8 @@ RUN confluent-hub install --no-prompt confluentinc/kafka-connect-hdfs:10.1.0
 COPY kafka-connect-s3/target/kafka-connect-s3-10.1.0-SNAPSHOT-development/share/java/kafka-connect-s3/kafka-connect-s3-10.1.0-SNAPSHOT.jar /usr/share/confluent-hub-components/confluentinc-kafka-connect-s3/lib/kafka-connect-s3-10.0.0.jar
 RUN mkdir /usr/share/confluent-hub-components/hudi-kafka-connect
 COPY kafka-connect-hudi/hudi-kafka-connect-bundle-0.12.1-amzn-0.jar /usr/share/confluent-hub-components/hudi-kafka-connect/hudi-kafka-connect-bundle-0.12.1-amzn-0.jar
+COPY kafka-connect-hudi/aws-java-sdk-bundle-1.11.271.jar /usr/share/confluent-hub-components/hudi-kafka-connect/aws-java-sdk-bundle-1.11.271.jar
+COPY kafka-connect-hudi/hadoop-aws-2.10.1.jar /usr/share/confluent-hub-components/hudi-kafka-connect/hadoop-aws-2.10.1.jar
 COPY connect-avro-distributed.properties /etc/schema-registry/
 COPY lr-model-pipeline.properties /etc/schema-registry/
 COPY first.properties /etc/schema-registry/
