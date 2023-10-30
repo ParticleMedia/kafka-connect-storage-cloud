@@ -14,3 +14,4 @@ COPY pub_asia_i18n.properties /etc/schema-registry/
 COPY push2.properties /etc/schema-registry/
 COPY novastaging.properties /etc/schema-registry/
 COPY connect-log4j.properties /etc/kafka/
+COPY novaprod.properties /etc/schema-registry/
