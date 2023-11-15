@@ -230,6 +230,12 @@
             <version>2.19.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- Temporary addition to fix protobuf conversion problem, see https://github.com/confluentinc/schema-registry/issues/1659 -->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-connect-avro-data</artifactId>
+            <version>7.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
