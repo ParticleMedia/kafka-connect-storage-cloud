@@ -30,4 +30,5 @@ COPY novastaging_test.properties /etc/schema-registry/
 COPY bloomprod.properties /etc/schema-registry/
 COPY feature.properties /etc/schema-registry/
 COPY feed.properties /etc/schema-registry/
+COPY tracelog-push.properties /etc/schema-registry/
 COPY connect-log4j.properties /etc/kafka/
