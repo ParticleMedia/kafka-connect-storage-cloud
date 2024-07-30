@@ -15,3 +15,12 @@ kafka_connect_s3_msp:
       from: /data/cache/m2
       to: /root/.m2
     dockerfile: Dockerfile.msp
+
+kafka_connect_s3_sandbox:
+  build:
+    command: "/bin/bash -c 'apt install git -y; cd kafka-connect-s3; rm -rf target; mvn clean package -U -DskipTests'"
+    image: docker.particlenews.com:5000/ubuntu/java8:vimcron
+    volume:
+      from: /data/cache/m2
+      to: /root/.m2
+    dockerfile: Dockerfile.sandbox
