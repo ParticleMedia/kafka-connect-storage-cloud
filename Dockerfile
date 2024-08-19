@@ -31,4 +31,6 @@ COPY bloomprod.properties /etc/schema-registry/
 COPY feature.properties /etc/schema-registry/
 COPY feed.properties /etc/schema-registry/
 COPY tracelog-push.properties /etc/schema-registry/
+# spidersandbox is open to access. Currently written in sandbox but writes to prod env for debug. So will put this in prod deployment.
+COPY spidersandbox.properties /etc/schema-registry/
 COPY connect-log4j.properties /etc/kafka/
