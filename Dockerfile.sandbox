@@ -18,4 +18,5 @@ COPY kafka-connect-hudi/hadoop-aws-2.10.1.jar /usr/share/confluent-hub-component
 RUN cp /usr/share/confluent-hub-components/confluentinc-kafka-connect-hdfs/lib/* /usr/share/confluent-hub-components/hudi-kafka-connect/lib/
 COPY sandbox-kafka-high.properties /etc/schema-registry/
 COPY sandbox-kafka-low.properties /etc/schema-registry/
+COPY spidersandbox.properties /etc/schema-registry/
 COPY connect-log4j.properties /etc/kafka/
