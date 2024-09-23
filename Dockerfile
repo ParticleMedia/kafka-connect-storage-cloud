@@ -25,6 +25,7 @@ COPY pub_euro_i18n.properties /etc/schema-registry/
 COPY pub_asia_i18n.properties /etc/schema-registry/
 COPY push2.properties /etc/schema-registry/
 COPY novastaging.properties /etc/schema-registry/
+COPY monetization-msk.properties /etc/schema-registry/
 COPY novaprod.properties /etc/schema-registry/
 COPY novastaging_test.properties /etc/schema-registry/
 COPY bloomprod.properties /etc/schema-registry/
