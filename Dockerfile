@@ -1,5 +1,10 @@
 FROM confluentinc/cp-kafka-connect-base:7.1.1 as base
 
+USER root
+# Download the aws-msk-iam-auth jar for msk authentication
+RUN wget https://github.com/aws/aws-msk-iam-auth/releases/download/v1.1.1/aws-msk-iam-auth-1.1.1-all.jar -O /usr/share/java/kafka/aws-msk-iam-auth-1.1.1-all.jar
+
+USER appuser
 COPY jmx/config.yaml /
 
 ENV KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=3231 -javaagent:/usr/share/java/cp-base-new/jmx_prometheus_javaagent-0.14.0.jar=0.0.0.0:4241:/config.yaml"
@@ -12,8 +17,6 @@ RUN confluent-hub install --no-prompt confluentinc/kafka-connect-protobuf-conver
 
 COPY kafka-connect-s3/target/kafka-connect-s3-10.1.0-SNAPSHOT-development/share/java/kafka-connect-s3/kafka-connect-avro-data-7.1.1.jar /usr/share/confluent-hub-components/confluentinc-kafka-connect-s3/lib/kafka-connect-avro-data-7.1.1.jar
 RUN rm /usr/share/confluent-hub-components/confluentinc-kafka-connect-s3/lib/kafka-connect-avro-data-6.0.1.jar
-# Download the aws-msk-iam-auth jar for msk authentication
-RUN wget https://github.com/aws/aws-msk-iam-auth/releases/download/v1.1.1/aws-msk-iam-auth-1.1.1-all.jar -O /usr/share/java/kafka/aws-msk-iam-auth-1.1.1-all.jar
 COPY kafka-connect-s3/target/kafka-connect-s3-10.1.0-SNAPSHOT-development/share/java/kafka-connect-s3/kafka-connect-s3-10.1.0-SNAPSHOT.jar /usr/share/confluent-hub-components/confluentinc-kafka-connect-s3/lib/kafka-connect-s3-10.0.0.jar
 
 RUN mkdir -p /usr/share/confluent-hub-components/hudi-kafka-connect/lib
