@@ -1,4 +1,4 @@
-FROM confluentinc/cp-kafka-connect-base:7.1.1 as base
+FROM confluentinc/cp-kafka-connect-base:7.5.6 as base
 
 USER root
 # Download the aws-msk-iam-auth jar for msk authentication
