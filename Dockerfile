@@ -3,6 +3,7 @@ FROM confluentinc/cp-kafka-connect-base:7.1.1 as base
 USER root
 # Download the aws-msk-iam-auth jar for msk authentication
 RUN wget https://github.com/aws/aws-msk-iam-auth/releases/download/v1.1.1/aws-msk-iam-auth-1.1.1-all.jar -O /usr/share/java/kafka/aws-msk-iam-auth-1.1.1-all.jar
+RUN yum install -y ca-certificates
 
 USER appuser
 COPY jmx/config.yaml /
