@@ -17,4 +17,5 @@ COPY kafka-connect-hudi/aws-java-sdk-bundle-1.11.271.jar /usr/share/confluent-hu
 COPY kafka-connect-hudi/hadoop-aws-2.10.1.jar /usr/share/confluent-hub-components/hudi-kafka-connect/lib/hadoop-aws-2.10.1.jar
 RUN cp /usr/share/confluent-hub-components/confluentinc-kafka-connect-hdfs/lib/* /usr/share/confluent-hub-components/hudi-kafka-connect/lib/
 COPY mspprod.properties /etc/schema-registry/
+COPY msp-monetization-msk.properties /etc/schema-registry/
 COPY connect-log4j.properties /etc/kafka/
