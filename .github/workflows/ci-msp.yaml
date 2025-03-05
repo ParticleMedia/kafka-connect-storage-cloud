@@ -1,0 +1,53 @@
+name: Build MSP release pipeline
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag name. Example: v1.0.0"
+        type: string
+        required: true
+      component:
+        description: "Component to build."
+        type: choice
+        default: "msp"
+        options:
+          - msp
+
+run-name: "Release build ${{ github.event.inputs.component }}-${{ github.event.inputs.tag }} by @${{ github.actor }}"
+
+permissions:
+  contents: write
+
+jobs:
+  msp-build:
+    if: github.actor!= 'dependabot-preview[bot]'
+    name: build
+    runs-on:
+      group: mspai
+    timeout-minutes: 45
+    env:
+      AWS_ACCOUNT: 590183745426
+      AWS_REGION: us-west-2
+      RELEASE_TAG: ${{ github.event.inputs.tag }}
+      COMPONENT: ${{ github.event.inputs.component }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: pwd
+      - run: ls -la
+      - name: ECR Login
+        run: |
+          aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com
+      - name: build docker
+        id: build
+        run: |
+          docker buildx build --platform linux/amd64,linux/arm64 \
+            -t $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/kafka-connect-s3:$COMPONENT-$RELEASE_TAG \
+            --push \
+            -f Dockerfile.$COMPONENT .
+      - name: push git tag
+        if: ${{ success() }}
+        run: |
+          git tag $COMPONENT-$RELEASE_TAG
+          git push origin $COMPONENT-$RELEASE_TAG
