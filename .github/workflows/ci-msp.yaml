@@ -26,8 +26,8 @@ jobs:
       group: mspai
     timeout-minutes: 45
     env:
-      AWS_ACCOUNT: 590183745426
-      AWS_REGION: us-west-2
+      AWS_ACCOUNT: ${{ vars.AWS_ACCOUNT }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
       RELEASE_TAG: ${{ github.event.inputs.tag }}
       COMPONENT: ${{ github.event.inputs.component }}
     steps:
