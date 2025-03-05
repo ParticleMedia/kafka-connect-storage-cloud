@@ -42,7 +42,7 @@ jobs:
       - name: build docker
         id: build
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 \
+          docker buildx build --platform linux/amd64 \
             -t $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/kafka-connect-s3:$COMPONENT-$RELEASE_TAG \
             --push \
             -f Dockerfile.$COMPONENT .
